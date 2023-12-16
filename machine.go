@@ -5,6 +5,7 @@ package statemachine
 type Machine interface {
 	Build(machineBuilderFn func(machineBuilder MachineBuilder))
 	SetMachineDef(def *MachineDef)
+	GetID() string
 
 	GetStateMap() StateMap
 

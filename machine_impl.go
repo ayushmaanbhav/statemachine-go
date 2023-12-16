@@ -69,6 +69,10 @@ func (m *machineImpl) SetMachineDef(def *MachineDef) {
 	m.restartTimedEventsLoops()
 }
 
+func (m *machineImpl) GetID() string {
+	return m.def.ID
+}
+
 func (m *machineImpl) restartTimedEventsLoops() {
 	for event, eventDef := range m.def.Events {
 		if eventDef.TimedEvery > 0 {
@@ -396,13 +400,13 @@ func (m *machineImpl) applyTransition(transition Transition) error {
 	return nil
 }
 
-// callback1(next: {
-//   callback2(next: {
-//     callback3(next: {
-//       applyTransition()
-//     })
-//   })
-// })
+//	callback1(next: {
+//	  callback2(next: {
+//	    callback3(next: {
+//	      applyTransition()
+//	    })
+//	  })
+//	})
 func (m *machineImpl) applyTransitionAroundCallbacks(callbacks []*TransitionCallbackFuncDef, args map[reflect.Type]interface{}, applyTransition func()) {
 	if len(callbacks) == 0 {
 		applyTransition()
