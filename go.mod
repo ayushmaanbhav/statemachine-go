@@ -1,3 +1,3 @@
-module github.com/Gurpartap/statemachine-go
+module github.com/ayushmaanbhav/statemachine-go
 
 go 1.13

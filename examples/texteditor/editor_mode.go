@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 
-	"github.com/Gurpartap/statemachine-go"
+	"github.com/ayushmaanbhav/statemachine-go"
 )
 
 type EditorMode struct {

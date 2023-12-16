@@ -2,7 +2,7 @@
 
 StateMachine supports creating productive State Machines In Go
 
-[![GoDoc](https://godoc.org/github.com/Gurpartap/statemachine-go?status.svg)](https://godoc.org/github.com/Gurpartap/statemachine-go)
+[![GoDoc](https://godoc.org/github.com/ayushmaanbhav/statemachine-go?status.svg)](https://godoc.org/github.com/ayushmaanbhav/statemachine-go)
 
 <!-- TOC -->
 
@@ -34,9 +34,9 @@ StateMachine supports creating productive State Machines In Go
 
 ## Introduction
 
-[`TLDR Turnstile Example`](https://github.com/Gurpartap/statemachine-go/blob/master/examples/turnstile/main.go)
+[`TLDR Turnstile Example`](https://github.com/ayushmaanbhav/statemachine-go/blob/master/examples/turnstile/main.go)
 
-<a href="https://raw.githubusercontent.com/Gurpartap/statemachine-go/master/examples/turnstile/diagram.svg?sanitize=true"><img src="https://raw.githubusercontent.com/Gurpartap/statemachine-go/master/examples/turnstile/diagram.svg?sanitize=true" alt="Turnstile StateMachine Example Diagram" /></a>
+<a href="https://raw.githubusercontent.com/ayushmaanbhav/statemachine-go/master/examples/turnstile/diagram.svg?sanitize=true"><img src="https://raw.githubusercontent.com/ayushmaanbhav/statemachine-go/master/examples/turnstile/diagram.svg?sanitize=true" alt="Turnstile StateMachine Example Diagram" /></a>
 
 State machines provide an alternative way of thinking about how we code any
 job/process/workflow.
@@ -72,13 +72,13 @@ __What Is A Finite-State Machine Even?__
 Run this in your project directory:
 
 ```bash
-go get -u https://github.com/Gurpartap/statemachine-go
+go get -u https://github.com/ayushmaanbhav/statemachine-go
 ```
 
 Import StateMachine with this line in your Go code:
 
 ```go
-import "github.com/Gurpartap/statemachine-go"
+import "github.com/ayushmaanbhav/statemachine-go"
 ```
 
 ## Usage
@@ -163,19 +163,19 @@ including `statemachine.MachineBuilder` and
 for writing the specification of how the state machine functions.
 
 The subsequent examples are a close port of
-[my experience](https://github.com/Gurpartap/cognizant/blob/master/lib/cognizant/process.rb#L28-L87)
+[my experience](https://github.com/ayushmaanbhav/cognizant/blob/master/lib/cognizant/process.rb#L28-L87)
 with using the [state_machines](https://github.com/state-machines/state_machines)
 Ruby gem, from which StateMachine Go package's DSL is highly inspired.
 
-<a href="https://raw.githubusercontent.com/Gurpartap/statemachine-go/master/examples/cognizant/diagram.svg?sanitize=true"><img src="https://raw.githubusercontent.com/Gurpartap/statemachine-go/master/examples/cognizant/diagram.svg?sanitize=true" alt="System Process StateMachine Example Diagram" /></a>
+<a href="https://raw.githubusercontent.com/ayushmaanbhav/statemachine-go/master/examples/cognizant/diagram.svg?sanitize=true"><img src="https://raw.githubusercontent.com/ayushmaanbhav/statemachine-go/master/examples/cognizant/diagram.svg?sanitize=true" alt="System Process StateMachine Example Diagram" /></a>
 
-The example represented in the diagram above is implemented in [`examples/cognizant/process.go`](https://github.com/Gurpartap/statemachine-go/blob/master/examples/cognizant/process.go).
+The example represented in the diagram above is implemented in [`examples/cognizant/process.go`](https://github.com/ayushmaanbhav/statemachine-go/blob/master/examples/cognizant/process.go).
 
 If, instead of the builders DSL, you would rather want to specify the
 StateMachine directly using definition structs, take a look at the
-[ExampleMachineDef](https://github.com/Gurpartap/statemachine-go/blob/master/machine_builder_test.go#L51-L91)
+[ExampleMachineDef](https://github.com/ayushmaanbhav/statemachine-go/blob/master/machine_builder_test.go#L51-L91)
 test function. The same may also be imported from JSON or
-[HCL](https://github.com/Gurpartap/statemachine-go/tree/master/examples/hcl).
+[HCL](https://github.com/ayushmaanbhav/statemachine-go/tree/master/examples/hcl).
 
 ### States and Initial State
 
@@ -630,7 +630,7 @@ callback you can use `func(err error)`, or
 
 ## About
 
-    Copyright 2017 Gurpartap Singh
+    Copyright 2023 Ayush Jain
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.

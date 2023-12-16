@@ -3,7 +3,7 @@ package statemachine
 import (
 	"reflect"
 
-	"github.com/Gurpartap/statemachine-go/internal/dynafunc"
+	"github.com/ayushmaanbhav/statemachine-go/internal/dynafunc"
 )
 
 type TransitionGuardDef struct {

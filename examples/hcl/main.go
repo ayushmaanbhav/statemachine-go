@@ -7,7 +7,7 @@ import (
 
 	"github.com/hashicorp/hcl"
 
-	"github.com/Gurpartap/statemachine-go"
+	"github.com/ayushmaanbhav/statemachine-go"
 )
 
 func main() {

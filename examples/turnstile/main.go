@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/Gurpartap/statemachine-go"
+	"github.com/ayushmaanbhav/statemachine-go"
 )
 
 type Turnstile struct {

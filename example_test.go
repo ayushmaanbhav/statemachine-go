@@ -3,7 +3,7 @@ package statemachine_test
 import (
 	"log"
 
-	"github.com/Gurpartap/statemachine-go"
+	"github.com/ayushmaanbhav/statemachine-go"
 )
 
 var processStates = []string{

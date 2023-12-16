@@ -8,7 +8,7 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/Gurpartap/statemachine-go"
+	"github.com/ayushmaanbhav/statemachine-go"
 )
 
 type Process struct {

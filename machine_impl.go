@@ -8,7 +8,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/Gurpartap/statemachine-go/internal/dynafunc"
+	"github.com/ayushmaanbhav/statemachine-go/internal/dynafunc"
 )
 
 type machineImpl struct {

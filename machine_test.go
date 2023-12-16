@@ -3,7 +3,7 @@ package statemachine_test
 import (
 	"fmt"
 
-	"github.com/Gurpartap/statemachine-go"
+	"github.com/ayushmaanbhav/statemachine-go"
 )
 
 func ExampleBuildNewMachine() {

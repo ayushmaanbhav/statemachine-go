@@ -1,7 +1,7 @@
 package statemachine_test
 
 import (
-	"github.com/Gurpartap/statemachine-go"
+	"github.com/ayushmaanbhav/statemachine-go"
 )
 
 type Process struct {
