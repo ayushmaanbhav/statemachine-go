@@ -106,8 +106,19 @@ func (s *TransitionCallbackDef) assertCallbackKind(callbackFunc TransitionCallba
 	t := reflect.TypeOf(callbackFunc)
 	switch t.Kind() {
 	case reflect.Func:
-		if t.NumOut() != 0 {
-			panic("callback func must not return anything")
+		requiredReturns := 0
+		switch s.validateFor {
+		case "BeforeTransition":
+			requiredReturns = 1
+		case "AroundTransition":
+			requiredReturns = 1
+		case "AfterTransition":
+			requiredReturns = 0
+		}
+		returnTypeError := reflect.TypeOf(new(error))
+		if t.NumOut() != requiredReturns ||
+			(requiredReturns == 1 && reflect.PtrTo(t.Out(0)) != returnTypeError) {
+			panic("callback func return type wrong")
 		}
 
 		optionalArgs := make(map[reflect.Type]struct{})

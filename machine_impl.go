@@ -362,7 +362,10 @@ func (m *machineImpl) applyTransition(transition Transition) error {
 	for _, callbackDef := range m.def.BeforeCallbacks {
 		if callbackDef.Matches(fromState, transition.To()) {
 			for _, callback := range callbackDef.Do {
-				m.exec(callback.Func, args)
+				err := m.exec(callback.Func, args)
+				if err != nil {
+					return err
+				}
 			}
 		}
 	}
@@ -377,7 +380,10 @@ func (m *machineImpl) applyTransition(transition Transition) error {
 		m.setCurrentState(transition.To())
 	}
 
-	m.applyTransitionAroundCallbacks(matchingCallbacks, args, applyTransition)
+	err := m.applyTransitionAroundCallbacks(matchingCallbacks, args, applyTransition)
+	if err != nil {
+		return err
+	}
 
 	for _, callbackDef := range m.def.AfterCallbacks {
 		if !callbackDef.Matches(fromState, transition.To()) {
@@ -407,10 +413,10 @@ func (m *machineImpl) applyTransition(transition Transition) error {
 //	    })
 //	  })
 //	})
-func (m *machineImpl) applyTransitionAroundCallbacks(callbacks []*TransitionCallbackFuncDef, args map[reflect.Type]interface{}, applyTransition func()) {
+func (m *machineImpl) applyTransitionAroundCallbacks(callbacks []*TransitionCallbackFuncDef, args map[reflect.Type]interface{}, applyTransition func()) error {
 	if len(callbacks) == 0 {
 		applyTransition()
-		return
+		return nil
 	}
 
 	calledBackNext := false
@@ -420,18 +426,16 @@ func (m *machineImpl) applyTransitionAroundCallbacks(callbacks []*TransitionCall
 		m.applyTransitionAroundCallbacks(callbacks[1:], args, applyTransition)
 	}
 
-	m.exec(callbacks[0].Func, args)
-	if !calledBackNext && len(callbacks) != 1 {
-		panic("non-last around callbacks must call next()")
+	err := m.exec(callbacks[0].Func, args)
+	if !calledBackNext && err == nil {
+		panic("callbacks must call next() when err is nil")
 	}
 
-	return
+	return err
 }
 
-func (m *machineImpl) exec(callback TransitionCallbackFunc, args map[reflect.Type]interface{}) {
+func (m *machineImpl) exec(callback TransitionCallbackFunc, args map[reflect.Type]interface{}) error {
 	args[reflect.TypeOf(new(Machine))] = m
 	fn := dynafunc.NewDynamicFunc(callback, args)
-	if err := fn.Call(); err != nil {
-		panic(err)
-	}
+	return fn.Call()
 }

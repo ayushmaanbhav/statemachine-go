@@ -12,9 +12,9 @@ import (
 // args[reflect.TypeOf(new(error))] = errors.New("some error occurred")
 // args[reflect.TypeOf(new(Transition))] = newBasicTransition("", "", NewMachine(), nil)
 //
-// if err := dynafunc.NewDynamicFunc(callbackFn, args).Call(); err != nil {
-// 	panic(err.Error())
-// }
+//	if err := dynafunc.NewDynamicFunc(callbackFn, args).Call(); err != nil {
+//		panic(err.Error())
+//	}
 type DynamicFunc struct {
 	fn  interface{}
 	in  map[reflect.Type]interface{}
@@ -53,6 +53,14 @@ func (f *DynamicFunc) Call() error {
 	}
 
 	f.Out = fnValue.Call(in)
+
+	if f.Out == nil || len(f.Out) == 0 {
+		return nil
+	}
+
+	if err, ok := f.Out[0].Interface().(error); ok {
+		return err
+	}
 
 	return nil
 }
