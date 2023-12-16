@@ -181,7 +181,7 @@ func (m *machineImpl) Fire(event string) (err error) {
 		return
 	}
 
-	err = m.applyTransition(transition)
+	err = m.applyTransition(event, transition)
 	return
 }
 
@@ -353,11 +353,12 @@ func (m *machineImpl) setCurrentState(state interface{}) error {
 	return ErrStateTypeNotSupported
 }
 
-func (m *machineImpl) applyTransition(transition Transition) error {
+func (m *machineImpl) applyTransition(event string, transition Transition) error {
 	fromState := m.GetState()
 
 	args := make(map[reflect.Type]interface{})
 	args[reflect.TypeOf(new(Transition))] = transition
+	args[reflect.TypeOf(new(string))] = event
 
 	for _, callbackDef := range m.def.BeforeCallbacks {
 		if callbackDef.Matches(fromState, transition.To()) {
@@ -394,6 +395,7 @@ func (m *machineImpl) applyTransition(transition Transition) error {
 		}
 		if callbackDef.ExitToState != "" && m.supermachine != nil {
 			if err := m.supermachine.applyTransition(
+				event,
 				newTransitionImpl(m.supermachine.currentState, callbackDef.ExitToState),
 			); err != nil {
 				return fmt.Errorf("could not exit submachine: %s", err)

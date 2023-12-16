@@ -129,13 +129,16 @@ func (s *TransitionCallbackDef) assertCallbackKind(callbackFunc TransitionCallba
 		switch s.validateFor {
 		case "BeforeTransition":
 			optionalArgs[reflect.TypeOf(new(Transition))] = struct{}{}
+			optionalArgs[reflect.TypeOf(new(string))] = struct{}{}
 
 		case "AroundTransition":
 			optionalArgs[reflect.TypeOf(new(Transition))] = struct{}{}
+			optionalArgs[reflect.TypeOf(new(string))] = struct{}{}
 			requiredArgs[reflect.TypeOf(new(func()))] = struct{}{}
 
 		case "AfterTransition":
 			optionalArgs[reflect.TypeOf(new(Transition))] = struct{}{}
+			optionalArgs[reflect.TypeOf(new(string))] = struct{}{}
 		}
 
 		// ensure all args are of expected types, whether optional or required
